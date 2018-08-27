@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusBarUtils.transparencyBar(this, Color.parseColor("#15bfff"));
+        StatusBarUtils.transparencyBar(this);
 
         Button btn_black = findViewById(R.id.btn_black);
         Button btn_white = findViewById(R.id.btn_white);

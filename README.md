@@ -18,6 +18,8 @@
 
 <img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.png" width="350"/><img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.1.png" width="350"/>
 
+这里如果想设置状态栏的颜色和标题栏颜色一样，可以在标题栏上方放一个View，动态的设置view的高度为状态栏的高度。
+
 #### Android  4.4以上的MIUI和Flyme以及Android6.0以上系统
 4.4以上的MIUI和Flyme系统以及Android6.0以上系统机型适配沉浸式状态栏，可以通过StatusBarUtils里面相关方法设置状态栏字体和图标的颜色切换
 

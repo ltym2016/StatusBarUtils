@@ -31,6 +31,12 @@
 
 ### StatusBarUtils如何使用
 #### 步骤一
+```
+implementation 'com.samlu:statusbarutils:1.0.0'
+
+```
+
+#### 步骤二
 - 直接在Activity中设置Window属性
 ```@Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +53,10 @@ android:fitsSystemWindows="true"
 ```
 - 使用android:windowTranslucentStatus属性需要在res目录下新建values-v19文件夹，style文件要放在里面
 
-#### 步骤二
+#### 步骤三
 - 在BaseActivity的onCreate里面调用StatusBarUtils.transparencyBar(this);开启沉浸式状态栏
 
-#### 步骤三
+#### 步骤四
 - 在需要设置状态栏黑白字体的Activity里面调用如下方法
 ```
 // 设置状态栏黑色字体图标 适配4.4以上版本的MIUI、Flyme和6.0以上版本其他Android

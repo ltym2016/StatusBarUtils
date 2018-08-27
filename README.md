@@ -20,9 +20,13 @@
 
 #### Android  4.4以上的MIUI和Flyme以及Android6.0以上系统
 4.4以上的MIUI和Flyme系统以及Android6.0以上系统机型适配沉浸式状态栏，可以通过StatusBarUtils里面相关方法设置状态栏字体和图标的颜色切换
+
 **miui 小米**
+
 <img src="https://github.com/ltym2016/StatusBarUtils/blob/400c0dcd783143b3daf06317d2bb3dfd0687a4b5/image/miui.png" width="350"/><img src="https://github.com/ltym2016/StatusBarUtils/blob/400c0dcd783143b3daf06317d2bb3dfd0687a4b5/image/miui1.png" width="350"/>
+
 **flyme 魅族**
+
 <img src="https://github.com/ltym2016/StatusBarUtils/blob/400c0dcd783143b3daf06317d2bb3dfd0687a4b5/image/meizu.png" width="350"/><img src="https://github.com/ltym2016/StatusBarUtils/blob/400c0dcd783143b3daf06317d2bb3dfd0687a4b5/image/meizu1.png" width="350"/>
 
 ### StatusBarUtils如何使用

@@ -14,6 +14,7 @@
 在Android5.系列的系统上，可以设置状态栏的颜色，但不可以改变状态栏字体和图标的颜色。所以这里统一设置为半透明效果，可以通过setStatusBarColor设置状态栏的背景色，但是部分华为机型不支持setStatusBarColor的方式，只能是黑色，至少保证状态栏图标可见。
 
 <img src="https://github.com/ltym2016/StatusBarUtils/blob/400c0dcd783143b3daf06317d2bb3dfd0687a4b5/image/5.0.png" width="350"/><img src="https://github.com/ltym2016/StatusBarUtils/blob/400c0dcd783143b3daf06317d2bb3dfd0687a4b5/image/5.1.png" width="350"/>
+
 部分华为机型不支持setStatusBarColor的方式，只能是黑色
 
 <img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.png" width="350"/><img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.1.png" width="350"/>

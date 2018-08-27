@@ -67,3 +67,5 @@ StatusBarUtils.StatusBarIconDark(Activity activity)
 // 设置状态栏白色字体图标 适配4.4以上版本的MIUI、Flyme和6.0以上版本其他Android
 StatusBarUtils.StatusBarIconLight(Activity activity)
 ```
+### Thanks
+[QMUI](https://github.com/QMUI/QMUI_Android/tree/1390e3a32941fb6f5cef4b1c815e2a6409902047)

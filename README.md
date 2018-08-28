@@ -35,7 +35,7 @@
 ### StatusBarUtils如何使用
 #### 步骤一
 ```
-implementation 'com.samlu:statusbarutils:1.0.0'
+implementation 'com.samlu:statusbarutils:1.0.1'
 
 ```
 
@@ -58,6 +58,21 @@ android:fitsSystemWindows="true"
 
 #### 步骤三
 - 在BaseActivity的onCreate里面调用StatusBarUtils.transparencyBar(this);开启沉浸式状态栏
+- 1.0.1版本增加支持类似支付宝蒙层效果，这样就不需要改变状态栏的字体和图标的颜色。
+```
+StatusBarUtils.transparencyBar(this, true)
+
+/**
+  * 开启沉浸式状态栏
+  *
+  * @param activity
+  * @param isOpen 是否开启蒙层效果的状态栏（在5.0以上机型适用）
+  */
+ public static void transparencyBar(Activity activity, boolean isOpen) {
+     isOpenMonLayer = isOpen;
+     transparencyBar(activity,0x40000000);
+ }
+```
 
 #### 步骤四
 - 在需要设置状态栏黑白字体的Activity里面调用如下方法

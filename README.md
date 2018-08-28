@@ -14,9 +14,12 @@
 在Android5.系列的系统上，可以设置状态栏的颜色，但不可以改变状态栏字体和图标的颜色。所以这里统一设置为半透明效果，可以通过setStatusBarColor设置状态栏的背景色，但是部分华为机型不支持setStatusBarColor的方式，只能是黑色，至少保证状态栏图标可见。
 
 <img src="https://github.com/ltym2016/StatusBarUtils/blob/400c0dcd783143b3daf06317d2bb3dfd0687a4b5/image/5.0.png" width="350"/><img src="https://github.com/ltym2016/StatusBarUtils/blob/400c0dcd783143b3daf06317d2bb3dfd0687a4b5/image/5.1.png" width="350"/>
+
 部分华为机型不支持setStatusBarColor的方式，只能是黑色
 
 <img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.png" width="350"/><img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.1.png" width="350"/>
+
+这里如果想设置状态栏的颜色和标题栏颜色一样，可以在标题栏上方放一个View，动态的设置view的高度为状态栏的高度。
 
 #### Android  4.4以上的MIUI和Flyme以及Android6.0以上系统
 4.4以上的MIUI和Flyme系统以及Android6.0以上系统机型适配沉浸式状态栏，可以通过StatusBarUtils里面相关方法设置状态栏字体和图标的颜色切换
@@ -64,3 +67,5 @@ StatusBarUtils.StatusBarIconDark(Activity activity)
 // 设置状态栏白色字体图标 适配4.4以上版本的MIUI、Flyme和6.0以上版本其他Android
 StatusBarUtils.StatusBarIconLight(Activity activity)
 ```
+### Thanks
+[QMUI](https://github.com/QMUI/QMUI_Android/tree/1390e3a32941fb6f5cef4b1c815e2a6409902047)

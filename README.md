@@ -60,7 +60,8 @@ android:fitsSystemWindows="true"
 - 在BaseActivity的onCreate里面调用StatusBarUtils.transparencyBar(this);开启沉浸式状态栏
 - 1.0.1版本增加支持类似支付宝蒙层效果，这样就不需要改变状态栏的字体和图标的颜色。
 ```
-StatusBarUtils.transparencyBar(this, true)
+// isOpen=true开启，false关闭，默认关闭
+StatusBarUtils.transparencyBar(Activity activity, boolean isOpen)
 
 /**
   * 开启沉浸式状态栏
@@ -82,5 +83,6 @@ StatusBarUtils.StatusBarIconDark(Activity activity)
 // 设置状态栏白色字体图标 适配4.4以上版本的MIUI、Flyme和6.0以上版本其他Android
 StatusBarUtils.StatusBarIconLight(Activity activity)
 ```
+- 如果StatusBarUtils.transparencyBar(Activity activity, boolean isOpen)的isOpen设置为true，上面的方面可以不调用。
 ### Thanks
 [QMUI](https://github.com/QMUI/QMUI_Android/tree/1390e3a32941fb6f5cef4b1c815e2a6409902047)

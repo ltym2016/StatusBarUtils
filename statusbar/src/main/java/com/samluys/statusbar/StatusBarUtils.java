@@ -22,6 +22,7 @@ public class StatusBarUtils {
     private final static int STATUSBAR_TYPE_FLYME = 2;
     private final static int STATUSBAR_TYPE_ANDROID6 = 3;
     private static @StatusBarType int mType = STATUSBAR_TYPE_DEFAULT;
+    private static boolean isOpenMonLayer = false; // 是否为状态栏开启蒙层效果
 
     private static boolean supportTranslucent() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
@@ -30,11 +31,22 @@ public class StatusBarUtils {
     }
 
     /**
-     * 设置状态栏背景为25%的黑色透明度
+     * 开启沉浸式状态栏
      *
      * @param activity
      */
     public static void transparencyBar(Activity activity) {
+        transparencyBar(activity,0x40000000);
+    }
+
+    /**
+     * 开启沉浸式状态栏
+     *
+     * @param activity
+     * @param isOpen 是否开启蒙层效果的状态栏（在5.0以上机型适用）
+     */
+    public static void transparencyBar(Activity activity, boolean isOpen) {
+        isOpenMonLayer = isOpen;
         transparencyBar(activity,0x40000000);
     }
     /**
@@ -51,7 +63,7 @@ public class StatusBarUtils {
             return;
         }
         // 小米和魅族4.4 以上版本支持沉浸式
-        if (SystemUtils.isMeizu() || SystemUtils.isMIUI()) {
+        if ((SystemUtils.isMeizu() || SystemUtils.isMIUI()) && !isOpenMonLayer) {
             Window window = activity.getWindow();
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -62,21 +74,36 @@ public class StatusBarUtils {
             Window window = activity.getWindow();
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && supportTransclentStatusBar6()) {
-                // android 6以后可以改状态栏字体颜色，因此可以自行设置为透明
-                // ZUK Z1是个另类，自家应用可以实现字体颜色变色，但没开放接口
-                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.TRANSPARENT);
-            } else {
-                // android 5不能修改状态栏字体颜色，因此直接用FLAG_TRANSLUCENT_STATUS，nexus表现为半透明
-                // 采取setStatusBarColor的方式，部分机型不支持，那就纯黑了，保证状态栏图标可见
+            if (isOpenMonLayer) {
                 window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(colorOn5x);
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && supportTransclentStatusBar6()) {
+                    // android 6以后可以改状态栏字体颜色，因此可以自行设置为透明
+                    // ZUK Z1是个另类，自家应用可以实现字体颜色变色，但没开放接口
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(Color.TRANSPARENT);
+                } else {
+                    // android 5不能修改状态栏字体颜色，因此直接用FLAG_TRANSLUCENT_STATUS，nexus表现为半透明
+                    // 采取setStatusBarColor的方式，部分机型不支持，那就纯黑了，保证状态栏图标可见
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(colorOn5x);
+                }
             }
         }
     }
+
+    /**
+     * 设置状态栏蒙层效果（同支付宝状态栏的效果）
+     * @param isOpen
+     */
+    public static void OpenMonLayerMode(boolean isOpen) {
+        isOpenMonLayer = isOpen;
+    }
+
 
     /**
      * 设置状态栏黑色字体图标
@@ -86,6 +113,11 @@ public class StatusBarUtils {
      * @return 1:MIUUI 2:Flyme 3:android6.0
      */
     public static boolean StatusBarIconDark(Activity activity) {
+
+        if (isOpenMonLayer) {
+            return false;
+        }
+
         if (activity == null) return false;
         // ZTK C2016只能时间和电池图标变色。。。。
         if (SystemUtils.isZTKC2016()) {
@@ -108,7 +140,7 @@ public class StatusBarUtils {
                 return true;
             } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP ||
                     Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
-                transparencyBar(activity);
+                transparencyBar(activity, false);
             } else {
                 activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             }
@@ -124,6 +156,11 @@ public class StatusBarUtils {
      * @return
      */
     public static boolean StatusBarIconLight(Activity activity) {
+
+        if (isOpenMonLayer) {
+            return false;
+        }
+
         if (activity == null) return false;
         if (mType == STATUSBAR_TYPE_DEFAULT) {
             // 默认状态，不需要处理

@@ -35,7 +35,7 @@
 ### StatusBarUtils如何使用
 #### 步骤一
 ```
-implementation 'com.samlu:statusbarutils:1.0.1'
+implementation 'com.samlu:statusbarutils:1.0.2'
 
 ```
 

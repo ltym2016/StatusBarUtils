@@ -6,9 +6,9 @@
 <img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.png" width="350"/><img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.1.png" width="350"/>
 
 #### Android 4.4到5.0(不包括5.0)并且非miui和非Flyme系统
-在Android系统4.4到5.0(不包括5.0)并且非miui和非Flyme系统，状态栏的背景和字体颜色由系统决定，这里不做兼容。正常有下面两种样式。
+在Android系统4.4到5.0(不包括5.0)并且非miui和非Flyme系统，状态栏的背景设置为黑色。
 
-<img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.png" width="350"/><img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.4.png" width="350"/>
+<img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.png" width="350"/><img src="https://github.com/ltym2016/StatusBarUtils/blob/master/image/4.3.1.png" width="350"/>
 
 #### Android 5.x系列并且非miui和非Flyme系统
 在Android5.系列的系统上，可以设置状态栏的颜色，但不可以改变状态栏字体和图标的颜色。所以这里统一设置为半透明效果，可以通过setStatusBarColor设置状态栏的背景色，但是部分华为机型不支持setStatusBarColor的方式，只能是黑色，至少保证状态栏图标可见。
@@ -35,7 +35,7 @@
 ### StatusBarUtils如何使用
 #### 步骤一
 ```
-implementation 'com.samlu:statusbarutils:1.0.3'
+implementation 'com.samlu:statusbarutils:1.0.4'
 
 ```
 

@@ -35,23 +35,14 @@
 ### StatusBarUtils如何使用
 #### 步骤一
 ```
-implementation 'com.samlu:statusbarutils:1.0.2'
+implementation 'com.samlu:statusbarutils:1.0.3'
 
 ```
 
 #### 步骤二
 - 直接在Activity中设置Window属性
-```@Override
-protected void onCreate(Bundle savedInstanceState) {
-   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-    }
-    super.onCreate(savedInstanceState);
-}
+
 ```
-- 或者在xml的style文件中设置：
-```
-<item name="android:windowTranslucentStatus">true</item> 
 android:fitsSystemWindows="true" 
 ```
 - 使用android:windowTranslucentStatus属性需要在res目录下新建values-v19文件夹，style文件要放在里面

@@ -142,9 +142,6 @@ public class StatusBarUtils {
                     Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
                 transparencyBar(activity, false);
                 return true;
-            } else {
-                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                return true;
             }
         }
         return false;

@@ -142,6 +142,12 @@ public class StatusBarUtils {
                     Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
                 transparencyBar(activity, false);
                 return true;
+            }else {
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+                tintManager.setStatusBarTintColor(Color.BLACK);
+                tintManager.setStatusBarTintEnabled(true);
             }
         }
         return false;

@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         StatusBarUtils.transparencyBar(this, false);
+        StatusBarUtils.StatusBarIconDark(this);
 
         Button btn_black = findViewById(R.id.btn_black);
         Button btn_white = findViewById(R.id.btn_white);

@@ -2,6 +2,7 @@ package com.samluys.statusbardemo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.samluys.statusbar.StatusBarUtils;
 
@@ -14,5 +15,6 @@ public class SecondActivity extends AppCompatActivity {
 
         StatusBarUtils.transparencyBar(this, false);
         StatusBarUtils.StatusBarIconDark(this);
+
     }
 }

@@ -275,6 +275,10 @@ public class StatusBarUtils {
     public static boolean FlymeSetStatusBarLightMode(Window window, boolean dark) {
         boolean result = false;
         if (window != null) {
+
+            // flyme 在 6.2.0.0A 支持了 Android 官方的实现方案，旧的方案失效
+            Android6SetStatusBarLightMode(window, dark);
+
             try {
                 WindowManager.LayoutParams lp = window.getAttributes();
                 Field darkFlag = WindowManager.LayoutParams.class

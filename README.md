@@ -35,7 +35,14 @@
 ### StatusBarUtils如何使用
 #### 步骤一
 ```
-implementation 'com.samlu:statusbarutils:1.0.4'
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+ 
+implementation 'com.github.ltym2016:StatusBarUtils:1.0.6'
 
 ```
 

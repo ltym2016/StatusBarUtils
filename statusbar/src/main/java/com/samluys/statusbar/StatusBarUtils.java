@@ -2,6 +2,7 @@ package com.samluys.statusbar;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.ColorInt;
@@ -16,6 +17,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class StatusBarUtils {
+
+    public static float sVirtualDensity = -1;
+    public static float sVirtualDensityDpi = -1;
+    private static int sStatusbarHeight = -1;
+    private final static int STATUS_BAR_DEFAULT_HEIGHT_DP = 25; // 大部分状态栏都是25dp
 
     private final static int STATUSBAR_TYPE_DEFAULT = 0;
     private final static int STATUSBAR_TYPE_MIUI = 1;
@@ -345,6 +351,77 @@ public class StatusBarUtils {
     @IntDef({STATUSBAR_TYPE_DEFAULT, STATUSBAR_TYPE_MIUI, STATUSBAR_TYPE_FLYME, STATUSBAR_TYPE_ANDROID6})
     @Retention(RetentionPolicy.SOURCE)
     private @interface StatusBarType {
+    }
+
+    /**
+     * 获取状态栏高度
+     *
+     * @param activity
+     * @return
+     */
+    public static int getStatusBarHeight(Activity activity) {
+//        Rect rect = new Rect();
+//        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+//        return rect.top == 0 ? 60 : rect.top;
+
+        if (sStatusbarHeight == -1) {
+            initStatusBarHeight(activity);
+        }
+        return sStatusbarHeight;
+    }
+
+    private static void initStatusBarHeight(Context context) {
+        Class<?> clazz;
+        Object obj = null;
+        Field field = null;
+        try {
+            clazz = Class.forName("com.android.internal.R$dimen");
+            obj = clazz.newInstance();
+            if (SystemUtils.isMeizu()) {
+                try {
+                    field = clazz.getField("status_bar_height_large");
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
+            }
+            if (field == null) {
+                field = clazz.getField("status_bar_height");
+            }
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+        if (field != null && obj != null) {
+            try {
+                int id = Integer.parseInt(field.get(obj).toString());
+                sStatusbarHeight = context.getResources().getDimensionPixelSize(id);
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+        }
+        if (SystemUtils.isTablet(context)
+                && sStatusbarHeight > dp2px(context, STATUS_BAR_DEFAULT_HEIGHT_DP)) {
+            //状态栏高度大于25dp的平板，状态栏通常在下方
+            sStatusbarHeight = 0;
+        } else {
+            if (sStatusbarHeight <= 0) {
+                if (sVirtualDensity == -1) {
+                    sStatusbarHeight = dp2px(context, STATUS_BAR_DEFAULT_HEIGHT_DP);
+                } else {
+                    sStatusbarHeight = (int) (STATUS_BAR_DEFAULT_HEIGHT_DP * sVirtualDensity + 0.5f);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param context
+     * @param dpValue
+     * @return int
+     * @description: 单位转换：dp转px
+     */
+    public static int dp2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
 }

@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class SystemUtils {
     private static String sFlymeVersionName;
     private static boolean sIsTabletChecked = false;
     private static boolean sIsTabletValue = false;
+    private static final String BRAND = Build.BRAND.toLowerCase();
 
     static {
         Properties properties = new Properties();
@@ -172,6 +174,22 @@ public class SystemUtils {
     }
 
 
+    public static boolean isVivo() {
+        return BRAND.contains("vivo") || BRAND.contains("bbk");
+    }
+
+    public static boolean isOppo() {
+        return BRAND.contains("oppo");
+    }
+
+    public static boolean isHuawei() {
+        return BRAND.contains("huawei") || BRAND.contains("honor");
+    }
+
+    public static boolean isEssentialPhone(){
+        return BRAND.contains("essential");
+    }
+
     /**
      * 判断是否为 ZUK Z1 和 ZTK C2016。
      * 两台设备的系统虽然为 android 6.0，但不支持状态栏icon颜色改变，因此经常需要对它们进行额外判断。
@@ -244,5 +262,40 @@ public class SystemUtils {
         }
         if (name != null) name = name.toLowerCase();
         return name;
+    }
+
+    private static final String VIVO_NAVIGATION_GESTURE = "navigation_gesture_on";
+    private static final String HUAWAI_DISPLAY_NOTCH_STATUS = "display_notch_status";
+    private static final String XIAOMI_DISPLAY_NOTCH_STATUS = "force_black";
+    private static final String XIAOMI_FULLSCREEN_GESTURE = "force_fsg_nav_bar";
+
+    /**
+     * 获取vivo手机设置中的"navigation_gesture_on"值，判断当前系统是使用导航键还是手势导航操作
+     *
+     * @param context app Context
+     * @return false 表示使用的是虚拟导航键(NavigationBar)， true 表示使用的是手势， 默认是false
+     */
+    public static boolean vivoNavigationGestureEnabled(Context context) {
+        int val = Settings.Secure.getInt(context.getContentResolver(), VIVO_NAVIGATION_GESTURE, 0);
+        return val != 0;
+    }
+
+
+    public static boolean xiaomiNavigationGestureEnabled(Context context) {
+        int val = Settings.Global.getInt(context.getContentResolver(), XIAOMI_FULLSCREEN_GESTURE, 0);
+        return val != 0;
+    }
+
+
+    public static boolean huaweiIsNotchSetToShowInSetting(Context context) {
+        // 0: 默认
+        // 1: 隐藏显示区域
+        int result = Settings.Secure.getInt(context.getContentResolver(), HUAWAI_DISPLAY_NOTCH_STATUS, 0);
+        return result == 0;
+    }
+
+    @TargetApi(17)
+    public static boolean xiaomiIsNotchSetToShowInSetting(Context context) {
+        return Settings.Global.getInt(context.getContentResolver(), XIAOMI_DISPLAY_NOTCH_STATUS, 0) == 0;
     }
 }

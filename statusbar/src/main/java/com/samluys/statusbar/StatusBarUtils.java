@@ -75,7 +75,7 @@ public class StatusBarUtils {
         }
 
         // 小米和魅族4.4 以上版本支持沉浸式
-        if (SystemUtils.isMeizu() || (SystemUtils.isMIUI() && Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+        if (SystemUtils.isFlymeLowerThan8() || (SystemUtils.isMIUI() && Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
                 && !isOpenMonLayer) {
             Window window = activity.getWindow();
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,

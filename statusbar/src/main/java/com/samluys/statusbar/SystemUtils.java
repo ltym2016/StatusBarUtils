@@ -158,6 +158,27 @@ public class SystemUtils {
         return isMeizu() && isHigher;
     }
 
+    public static boolean isFlymeLowerThan8() {
+        boolean isLower = false;
+        if (sFlymeVersionName != null && !sFlymeVersionName.equals("")) {
+            Pattern pattern = Pattern.compile("(\\d+\\.){2}\\d");
+            Matcher matcher = pattern.matcher(sFlymeVersionName);
+            if (matcher.find()) {
+                String versionString = matcher.group();
+                if (versionString != null && !versionString.equals("")) {
+                    String[] version = versionString.split("\\.");
+                    if (version.length >= 1) {
+                        if (Integer.parseInt(version[0]) < 8) {
+                            isLower = true;
+                        }
+                    }
+
+                }
+            }
+        }
+        return isMeizu() && isLower;
+    }
+
     /**
      * 判断是否为魅族
      */
